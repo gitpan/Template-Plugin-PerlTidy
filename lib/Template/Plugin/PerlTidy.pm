@@ -4,7 +4,7 @@ use Template::Plugin::Filter;
 use Perl::Tidy;
 use base qw( Template::Plugin::Filter );
 use vars qw($VERSION);
-$VERSION = 0.01;
+$VERSION = 0.02;
 
 use vars qw( $DYNAMIC );
 $DYNAMIC = 1;
@@ -13,7 +13,7 @@ $DYNAMIC = 1;
 
 =head1 NAME
 
-Template::Plugin::PerlTidy - Perl::Tidy filter
+Template::Plugin::PerlTidy - Perl::Tidy filter for Template Toolkit
 
 =head1 SYNOPSIS
 
@@ -52,6 +52,9 @@ The options defined in Perl::Tidy::perltidy() are also supported
 (C<stderr>, C<perltidyrc>, C<logfile>, C<errorfile>). The C<source> and
 <destination> options are handled by the filter.
 
+By default, the C<quiet> option is turned on, but you can disable it 
+using the C<verbose> option.
+
 Note that options which does not take any arguments (like -html or -pre)
 should be enclosed in quotes (i.e. C<[% USE PerlTidy 'html' %]>), and
 options which take an argument are not enclosed in quotes (i.e. C<[% USE
@@ -78,9 +81,14 @@ sub filter {
 
     my $argv;
     foreach my $key ( keys %options ) {
+		next if $key eq 'verbose';
         $argv .= $options{$key} ? qq' -$key="$options{$key}"' : " -$key";
     }
 
+	if ( ! exists $options{verbose} ){
+		$argv .= ' -q'; # be quiet by default
+	}
+	
     my $formated;
     perltidy(
         source      => \$text,
@@ -91,6 +99,7 @@ sub filter {
         logfile     => $logfile,
         errorfile   => $errorfile,
     );
+
     return $formated;
 }
 
@@ -100,9 +109,21 @@ __END__
 
 =pod
 
+=head1 NOTE
+
+Perl::Tidy is currently unavailable from the CPAN. You can download it
+from its Sourceforge page (L<http://perltidy.sourceforge.net/>)
+
+=head1 BUGS
+
+Please report any bugs or comments using the Request Tracker interface:
+L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Template%3A%3APlugin%3A%3APerlTidy>
+
 =head1 AUTHOR
 
 Briac Pilpré <briac@cpan.org>
+
+Thanks to BooK and echo for their help.
 
 =head1 COPYRIGHT
 
@@ -113,5 +134,4 @@ This module is distributed under the same terms as perl itself.
 Template::Plugin::Filter, Perl::Tidy
 
 =cut
-
 
