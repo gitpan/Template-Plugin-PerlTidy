@@ -1,0 +1,9 @@
+Template::Plugin::PerlTidy - version 0.01
+
+This modules is a Template Toolkit Filter for Perl::Tidy. It can be used
+to automatically display coloured and formatted perl code in web pages.
+
+
+Author: Briac Pilpré <briac@cpan.org>
+Copyright: This module is distributed under the same terms as perl itself.
+
