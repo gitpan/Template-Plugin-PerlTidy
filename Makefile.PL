@@ -11,3 +11,4 @@ WriteMakefile(
 	ABSTRACT_FROM => 'lib/Template/Plugin/PerlTidy.pm',
 	AUTHOR        => 'Briac Pilpré <briac@cpan.org>',
 );
+

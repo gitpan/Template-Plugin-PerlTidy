@@ -4,7 +4,8 @@ use Template::Plugin::Filter;
 use Perl::Tidy;
 use base qw( Template::Plugin::Filter );
 use vars qw($VERSION);
-$VERSION = 0.02;
+
+$VERSION = 0.03;
 
 use vars qw( $DYNAMIC );
 $DYNAMIC = 1;
@@ -24,8 +25,7 @@ Template::Plugin::PerlTidy - Perl::Tidy filter for Template Toolkit
    #!/usr/bin/perl -w
    use strict;
    my@foo=(1,2,'a',4);
-   for(1,3,5){print" $_\n"}
-   my     %hash =( 1=>'foo',foo=>'bar',);
+   for(1,3,5){print" $_\n"}my     %hash =( 1=>'foo',foo=>'bar',);
  [% END %]
 
 
@@ -109,11 +109,6 @@ __END__
 
 =pod
 
-=head1 NOTE
-
-Perl::Tidy is currently unavailable from the CPAN. You can download it
-from its Sourceforge page (L<http://perltidy.sourceforge.net/>)
-
 =head1 BUGS
 
 Please report any bugs or comments using the Request Tracker interface:
@@ -123,7 +118,10 @@ L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Template%3A%3APlugin%3A%3APerl
 
 Briac Pilpré <briac@cpan.org>
 
+Thanks to Steve Hancock for PerlTidy
+
 Thanks to BooK and echo for their help.
+
 
 =head1 COPYRIGHT
 
